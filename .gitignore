@@ -1,0 +1,20 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code local settings
+.claude/settings.local.json
+.claude/agent-memory-local/
+
+# Node
+node_modules/
+
+# Temp
+*.tmp
+*.bak

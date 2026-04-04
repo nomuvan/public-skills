@@ -1,0 +1,10 @@
+model = "o4-mini"
+approval_policy = "on-request"
+model_reasoning_effort = "high"
+
+[features]
+codex_hooks = true
+
+[[hooks]]
+event = "SessionStart"
+command = "echo 'public-skills session started'"
