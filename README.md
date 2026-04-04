@@ -30,6 +30,16 @@ cp -r skills/<skill-name> ~/.claude/skills/
 cp -r skills/<skill-name> ~/.agents/skills/
 ```
 
+### Windows (PowerShell)
+
+```powershell
+# Claude Code
+Copy-Item -Recurse skills/<skill-name> "$env:USERPROFILE\.claude\skills\"
+
+# Codex CLI
+Copy-Item -Recurse skills/<skill-name> "$env:USERPROFILE\.agents\skills\"
+```
+
 ## Skills
 
 | Skill | Description |

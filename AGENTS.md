@@ -12,6 +12,8 @@ Claude Code / Codex CLI 向けの公開スキルライブラリ。
 
 - `skills/` — 公開スキル本体
 - `docs/` — 方針・ガイドライン
+- `.claude/` — このリポジトリ管理用ハーネス（Claude Code）
+- `.codex/` — このリポジトリ管理用ハーネス（Codex CLI）
 
 ## スキル設計原則
 
@@ -33,9 +35,10 @@ Claude Code / Codex CLI 向けの公開スキルライブラリ。
 ## スキル品質基準
 
 - frontmatter の name, description は必須
-- 副作用のあるスキルは適切にガード
-- セキュリティリスクのあるコマンドを含まないこと
-- クロスプラットフォーム互換性
+- description がスキルの用途を正確に表現しているか
+- 副作用のあるスキルは `disable-model-invocation: true` を検討
+- セキュリティリスクのあるコマンドを含まないか
+- クロスプラットフォーム互換性があるか
 
 ## 開発プロセス
 
