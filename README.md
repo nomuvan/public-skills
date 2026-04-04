@@ -44,7 +44,9 @@ Copy-Item -Recurse skills/<skill-name> "$env:USERPROFILE\.agents\skills\"
 
 | Skill | Description |
 |-------|-------------|
-| *(coming soon)* | |
+| [cmux](skills/cmux/) | cmux CLIでワークスペース管理、セッション間連携、ブラウザ自動化、通知 |
+| [cmux-workspace](skills/cmux-workspace/) | cmuxで作業用Windowを起動・停止。TOML定義、tmux/Claude/Codex自動ログイン対応 |
+| [launchd-schedule](skills/launchd-schedule/) | macOS launchdで定期タスク実行。Claude対話/スクリプト/任意コマンドの3モード |
 
 ## Skill Format
 
