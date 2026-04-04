@@ -1,0 +1,38 @@
+# ============================================================
+# Window構成定義 — サンプル
+#
+# このファイルをコピーして workspaces/default.toml を作成してください。
+#
+# [[window]]         — Window定義（複数可）
+# [[window.pane]]    — Window内のターミナル（ワークスペース）定義
+#
+# paneフィールド:
+#   title        — cmux左メニュー表示名
+#   workdir      — ワークディレクトリ
+#   tmux_session — tmuxセッション名（省略でtmux不使用）
+#   mode         — "claude" | "codex" | "plain"（デフォルト: "plain"）
+#   login_cmd    — claude/codex起動コマンド
+# ============================================================
+
+[[window]]
+name = "dev"
+default = true
+
+  [[window.pane]]
+  title = "frontend_01"
+  workdir = "/path/to/frontend"
+  tmux_session = "frontend_01"
+  mode = "claude"
+  login_cmd = "claude --name frontend_01"
+
+  [[window.pane]]
+  title = "backend_01"
+  workdir = "/path/to/backend"
+  tmux_session = "backend_01"
+  mode = "claude"
+  login_cmd = "claude --name backend_01"
+
+  [[window.pane]]
+  title = "tools_01"
+  workdir = "/path/to/tools"
+  mode = "plain"

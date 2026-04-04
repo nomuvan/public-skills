@@ -1,0 +1,3 @@
+model = "o4-mini"
+approval_policy = "on-request"
+model_reasoning_effort = "high"
