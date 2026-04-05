@@ -371,7 +371,7 @@ def open_tabby_tab(tmux_session, title):
             # Set terminal title BEFORE tmux attach (tmux won't override if set-titles is off)
             mcp_call("send_input", {
                 "sessionId": sid,
-                "input": f"printf '\\033]0;{tab_title}\\007'; tmux attach -t {tmux_session}\r",
+                "input": f"printf '\\033]0;{tab_title}\\007'; tmux attach -t {tmux_session}; exit\r",
             })
             time.sleep(0.5)
             print(f"    MCP: opened tab '{tab_title}'")
@@ -396,10 +396,9 @@ def _close_tabby_tab(tmux_session, title):
 
 
 def _open_tabby_tab_cli(tmux_session, title):
-    """Fallback: Open Tabby tab via CLI."""
-    attach_cmd = os.path.join(PROJECT_ROOT, "scripts", "tmux-attach.cmd")
-    attach_cmd_win = win_path_to_ps(attach_cmd)
-    cmd = [TABBY_EXE, "run", attach_cmd_win, tmux_session, title]
+    """Fallback: Open Tabby tab via profile (behaviorOnSessionEnd=close)."""
+    profile_name = ensure_tabby_profile(tmux_session, title)
+    cmd = [TABBY_EXE, "open", profile_name]
     try:
         subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         time.sleep(1)
