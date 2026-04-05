@@ -8,6 +8,7 @@ import argparse
 import glob
 import json
 import os
+import platform
 import subprocess
 import sys
 import time
@@ -154,22 +155,42 @@ def load_workspace_configs():
     return configs
 
 
-def find_workspace(configs, name=None):
-    """Find a workspace window definition by name or default. Returns (window, machine)."""
-    for config in configs:
-        machine = config.get("machine", "")
-        for window in config.get("window", []):
-            if name and window.get("name") == name:
-                return window, machine
-            if not name and window.get("default", False):
-                return window, machine
-    if not name:
-        for config in configs:
+def find_workspace(configs, name=None, machine_filter=None):
+    """Find a workspace window definition by name or default. Returns (window, machine).
+
+    When machine_filter is set, only configs matching that machine are considered.
+    If no match, falls back to all configs.
+    """
+    # If no explicit machine_filter, auto-detect from hostname
+    if machine_filter is None:
+        machine_filter = platform.node().lower()
+
+    def _search(cfgs):
+        for config in cfgs:
             machine = config.get("machine", "")
-            windows = config.get("window", [])
-            if windows:
-                return windows[0], machine
-    return None, ""
+            for window in config.get("window", []):
+                if name and window.get("name") == name:
+                    return window, machine
+                if not name and window.get("default", False):
+                    return window, machine
+        if not name:
+            for config in cfgs:
+                machine = config.get("machine", "")
+                windows = config.get("window", [])
+                if windows:
+                    return windows[0], machine
+        return None, ""
+
+    # Try machine-filtered configs first
+    if machine_filter:
+        filtered = [c for c in configs if c.get("machine", "").lower() == machine_filter]
+        if filtered:
+            result = _search(filtered)
+            if result[0] is not None:
+                return result
+
+    # Fallback to all configs
+    return _search(configs)
 
 
 def is_claude_or_codex_running(session):
@@ -181,10 +202,12 @@ def is_claude_or_codex_running(session):
     indicators = [
         "claude>",
         "Claude Code",
-        ">",  # claude prompt
+        "\u276f",  # ❯ claude prompt (heavy right-pointing angle)
+        ">",  # claude prompt (ascii fallback)
         "codex>",
         "What can I help you with?",
         "Tips:",
+        "bypass permissions",
     ]
     for indicator in indicators:
         if indicator in screen:
@@ -204,7 +227,8 @@ def wait_for_prompt(session, timeout=60):
                 "What can I help",
                 "Tips:",
                 "claude>",
-                ">",
+                "\u276f",  # ❯
+                "bypass permissions",
             ]):
                 print(" ready!")
                 return True
