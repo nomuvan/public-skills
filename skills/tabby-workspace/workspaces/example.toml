@@ -1,0 +1,18 @@
+machine = "my-machine"
+
+[[window]]
+name = "example"
+default = true
+
+  [[window.pane]]
+  title = "project_01"
+  workdir = "C:\\Users\\user\\projects\\my-project"
+  tmux_session = "project_01"
+  mode = "claude"
+  login_cmd = "claude --dangerously-skip-permissions --name project_01 --remote-control-session-name-prefix {machine}:project_01"
+
+  [[window.pane]]
+  title = "shell_01"
+  workdir = "C:\\Users\\user\\projects\\my-project"
+  tmux_session = "shell_01"
+  mode = "plain"

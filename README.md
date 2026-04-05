@@ -42,11 +42,14 @@ Copy-Item -Recurse skills/<skill-name> "$env:USERPROFILE\.agents\skills\"
 
 ## Skills
 
-| Skill | Description |
-|-------|-------------|
-| [cmux](skills/cmux/) | cmux CLIでワークスペース管理、セッション間連携、ブラウザ自動化、通知 |
-| [cmux-workspace](skills/cmux-workspace/) | cmuxで作業用Windowを起動・停止。TOML定義、tmux/Claude/Codex自動ログイン対応 |
-| [launchd-schedule](skills/launchd-schedule/) | macOS launchdで定期タスク実行。Claude対話/スクリプト/任意コマンドの3モード |
+| Skill | Platform | Description |
+|-------|----------|-------------|
+| [cmux](skills/cmux/) | macOS | cmux CLIでワークスペース管理、セッション間連携、ブラウザ自動化、通知 |
+| [cmux-workspace](skills/cmux-workspace/) | macOS | cmuxで作業用Windowを起動・停止。TOML定義、tmux/Claude/Codex自動ログイン対応 |
+| [tabby](skills/tabby/) | Windows | Tabby CLI + MCP API（34ツール）リファレンス。タブ管理・コマンド実行・ペイン分割 |
+| [wsl-tmux](skills/wsl-tmux/) | Windows | WSL tmux操作リファレンス。セッション管理・コマンド送信・画面読み取り |
+| [tabby-workspace](skills/tabby-workspace/) | Windows | Tabby + WSL tmuxでマルチペインワークスペース起動・停止。TOML定義、マシン名対応 |
+| [launchd-schedule](skills/launchd-schedule/) | macOS | macOS launchdで定期タスク実行。Claude対話/スクリプト/任意コマンドの3モード |
 
 ## Skill Format
 
